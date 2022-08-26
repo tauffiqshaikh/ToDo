@@ -1,0 +1,40 @@
+<style>
+  #btn{
+    font-size: 18px;
+    margin-top: 30px;
+    background-color: blue;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+  }
+
+  .input{
+    font-size: x-large;
+    /* font-weight: bold; */
+    display: block;
+    /* border: none; */
+    margin: 10% 0 0 0;
+    outline: none;
+    color: rgb(50, 50, 50);
+  }
+
+  .form-container{
+    padding: 10% 0;
+    display: flex;
+  justify-content: center;
+  }
+</style>
+</head>
+<body>
+  <div class="form-container">
+    <form style="display: flex; flex-direction : column" method="post" action="/signup">
+      <h1 style="text-align: center; color: blue;">SIGNUP</h1>
+      <input class="input" type="text" name="username" placeholder="username">
+      <input class="input" type="password" name="password" placeholder="password">
+      <input id="btn" type="submit" value="signup">
+      <%- include("partials/authError.ejs") %>
+      <a style="margin-top: 20px; text-align: center;" href="./login">login</a>
+    </form>
+  </div>
+</body>

@@ -1,0 +1,80 @@
+  <style>
+    #ipt{
+      width: 90%;
+      height: 250px;
+      font-size: xx-large;
+      font-weight: bold;
+      border: none;
+      margin: 15% 5% 0 0;
+      outline: none;
+      color: rgb(50, 50, 50);
+    }
+
+    h1{
+      color : rgb(50, 50, 50);
+    }
+
+    p{
+      color : rgb(50, 50, 50);
+      inline-size: 70%;
+      overflow-wrap: break-word;
+    }
+
+    #parent1{
+      --box-shadow-color: rgb(155, 155, 155);
+      background-color: rgb(228, 228, 228);
+      margin: 1% 2% 1% 1% ;
+      padding: 2.5%;
+      box-shadow: 5px 5px var(--box-shadow-color);
+    }
+    
+    .btn{
+    font-size: 18px;
+    margin-top: 30px;
+    background-color: blue;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+  }
+  </style>
+<body>
+  <div id="todoContainer" >
+    <div id="parent1" style="width:60%; display:inline-block;">
+      <%- include("partials/header.ejs") %>
+      <br>
+      <ul id="list">
+        <% for(todo in todos){ %>
+          <li>
+            <% if(todos[todo].completed) { %>
+              <p style=" font-weight: normal; font-size: large; text-decoration:line-through" ><%= todos[todo].value %></p>
+            <%} else {%>
+              <p style=" font-weight: normal; font-size: large; text-decoration:none" ><%= todos[todo].value %></p>
+            <% } %>
+            <img style="max-width: 50%;" src="/images/<%= todos[todo].imagePath %>" alt="">
+            <form method="post" style="display: inline;" action="/delete-todo/<%=todos[todo]._id%>">
+              <button type="submit" id="del" style="float: right ; margin-right: 10px;" ><img  src= './icons/bin.png' style="max-width: 100%; height:0.5cm;" >
+              </button>
+            </form>
+
+            <form method= "post" style="display: inline;" action="/change-todo-status/<%= todos[todo]._id %>">
+              <button onclick="" type="submit" id="read" style="float: right ; margin-right: 10px;" ><img src= "<%= todos[todo].completed ? './icons/cross.png' : './icons/check.png' %>" style="max-width: 100%; height:0.5cm;" >
+            </button>
+            </form>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+    <div style="width:30%; display:inline-block; position: absolute;">
+      <form action="/logout" method="post">
+        <input style="float: right; margin-top: 0; background-color: red; font-size: small; font-size: 15px;" type="submit" value="Logout" class="btn" />
+      </form>
+      <form method="post" action="/add-todo" enctype="multipart/form-data">
+        <textarea required = "true" name="value" id="ipt" placeholder="I need to..."></textarea><br><br>
+        <input required = "true" type="file" name="task-picture" id="">
+        <br>
+        <input type="submit" class="btn" />
+      </form>
+    </div>
+    </div>
+</body>
